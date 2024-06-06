@@ -26,7 +26,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 
 const registerUser = asyncHandleer(async (req, res, next) => {
   const { fullName, email, username, password } = req.body; //1
-
+  console.log("Ho");
   if (
     [fullName, email, username, password].some((item) => item?.trim() === "")
   ) {
@@ -40,7 +40,7 @@ const registerUser = asyncHandleer(async (req, res, next) => {
   if (existerUser) {
     throw new ApiError(409, "user already exists");
   }
-  console.log(req.files);
+  console.log(req.files, "no files");
   const avatarLocalPath = req.files?.avatar[0]?.path; //multer functionality //4
   const coverImageLocalPath = req.files.coverImage[0]?.path;
   console.log(avatarLocalPath);
