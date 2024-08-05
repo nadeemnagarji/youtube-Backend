@@ -51,3 +51,20 @@ export const uploadVideo = asyncHandleer(async (req, res) => {
     .status(201)
     .json(new ApiResponse(200, video, "video uploaded succesfully"));
 });
+
+
+export const getUserVideos =asyncHandleer(async (req,res)=>{
+  const userId = req.user._id;
+  console.log(userId);
+  const video = await Video.find({owner:userId})
+
+  if(!video){
+    return res
+    .status(404)
+    .json(new ApiResponse(404, video, "video not found")) 
+  }
+  
+  return res
+  .status(201)
+  .json(new ApiResponse(200, video, "video sent succesfully"))
+})

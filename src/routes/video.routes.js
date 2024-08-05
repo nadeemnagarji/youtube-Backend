@@ -1,12 +1,12 @@
 import express, { Router } from "express";
-import { getAllVdieos, uploadVideo } from "../controllers/video.controller.js";
+import { getAllVdieos, getUserVideos, uploadVideo } from "../controllers/video.controller.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
-``;
+
 const videoRouter = Router();
 
 videoRouter.route("/all").get(getAllVdieos);
-
+videoRouter.route("/myvideos").get(verifyJwt,getUserVideos)
 videoRouter.route("/upload").post(
   verifyJwt,
   upload.fields([
